@@ -1,0 +1,58 @@
+name: TTTPlugin1_16_2
+version: '${version}'
+main: de.lojaw.tttplugin.TTTPlugin_1_16_2
+api-version: '1.16'
+depend: [ ProtocolLib ]
+
+commands:
+  hide:
+    description: Hides equipment of players
+    usage: /hide [none | held | all]
+    permission: tttplugin.hide
+  ttt:
+    description: Starts a TTT game
+    usage: /ttt
+    permission: tttplugin.ttt
+  ci:
+    description: Clears the inventories of all online players.
+    usage: /ci
+    permission: tttplugin.clearinventories
+  cc:
+    description: customchestplate
+    usage: /cc
+    permission: tttplugin.customchestplate
+  ccrepeat:
+    description: customchestplate repeat
+    usage: /ccrepeat
+    permission: tttplugin.customchestplaterepeat
+  colorsequence:
+    description: colorsequence
+    usage: /colorsequence
+    permission: tttplugin.colorsequence
+  colorsequencelimited:
+    description: colorsequence limited
+    usage: /colorsequencelimited
+    permission: tttplugin.colorsequence
+
+permissions:
+  tttplugin.hide:
+    description: Allows using the /hide command
+    default: op
+  tttplugin.ttt:
+    description: Allows using the /ttt command
+    default: op
+  tttplugin.clearinventories:
+    description: Allows clearing the inventories of all online players.
+    default: op
+  tttplugin.customchestplate:
+    description: Allows using the /cc command
+    default: op
+  tttplugin.customchestplaterepeat:
+    description: Allows using the /ccrepeat command
+    default: op
+  tttplugin.colorsequence:
+    description: Allows using the /colorsequence command
+    default: op
+  tttplugin.colorsequencelimited:
+    description: Allows using the /colorsequencelimited command
+    default: op

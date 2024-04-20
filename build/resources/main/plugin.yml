@@ -1,0 +1,37 @@
+name: TTTPlugin1_16_2
+version: '1.0-SNAPSHOT'
+main: de.lojaw.tttplugin.TTTPlugin_1_16_2
+api-version: '1.16'
+depend: [ ProtocolLib ]
+
+commands:
+  hide:
+    description: Hides equipment of players
+    usage: /hide [none | held | all]
+    permission: tttplugin.hide
+  ttt:
+    description: Starts a TTT game
+    usage: /ttt
+    permission: tttplugin.ttt
+  ci:
+    description: Clears the inventories of all online players.
+    usage: /ci
+    permission: tttplugin.clearinventories
+  cc:
+    description: customchestplate
+    usage: /cc
+    permission: tttplugin.customchestplate
+
+permissions:
+  tttplugin.hide:
+    description: Allows using the /hide command
+    default: op
+  tttplugin.ttt:
+    description: Allows using the /ttt command
+    default: op
+  tttplugin.clearinventories:
+    description: Allows clearing the inventories of all online players.
+    default: op
+  tttplugin.customchestplate:
+    description: Allows using the /cc command
+    default: op
