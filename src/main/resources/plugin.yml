@@ -33,6 +33,10 @@ commands:
     description: colorsequence limited
     usage: /colorsequencelimited
     permission: tttplugin.colorsequence
+  colorsequencelimitednoprotocollib:
+    description: colorsequence limited no protocollib
+    usage: /colorsequencelimitednoprotocollib
+    permission: tttplugin.colorsequence
 
 permissions:
   tttplugin.hide:
@@ -55,4 +59,7 @@ permissions:
     default: op
   tttplugin.colorsequencelimited:
     description: Allows using the /colorsequencelimited command
+    default: op
+  tttplugin.colorsequencelimitednoprotocollib:
+    description: Allows using the /colorsequencelimitednoprotocollib command
     default: op

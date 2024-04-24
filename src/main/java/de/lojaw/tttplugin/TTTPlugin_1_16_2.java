@@ -58,6 +58,18 @@ public final class TTTPlugin_1_16_2 extends JavaPlugin {
             Color.GRAY, Color.RED, Color.GRAY, Color.RED, Color.GRAY
     );
 
+    private static final List<Color> COLORS6 = Arrays.asList(
+            Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE,
+            Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE,
+            Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE
+    );
+
+    private static final List<Color> COLORS7 = Arrays.asList(
+            Color.ORANGE, Color.PURPLE, Color.ORANGE, Color.PURPLE, Color.ORANGE, Color.PURPLE,
+            Color.ORANGE, Color.PURPLE, Color.ORANGE, Color.PURPLE, Color.ORANGE, Color.PURPLE,
+            Color.ORANGE, Color.PURPLE, Color.ORANGE, Color.PURPLE, Color.ORANGE
+    );
+
     @Override
     public void onEnable() {
         ProtocolLibrary.getProtocolManager()
@@ -99,12 +111,53 @@ public final class TTTPlugin_1_16_2 extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
+        if (command.getName().equalsIgnoreCase("colorsequencelimitednoprotocollib")) {
+            if (sender instanceof Player) {
+                final Player player = (Player) sender;
+                player.sendMessage(ChatColor.GREEN + "Deine Lederbrustplatte wird sich nun in einer Sequenz ändern.");
+
+                final List<List<Color>> colorLists = Arrays.asList(COLORS2, COLORS3);
+                final AtomicInteger colorListIndex = new AtomicInteger(0);
+                final AtomicInteger colorIndex = new AtomicInteger(0);
+
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        List<Color> currentColorList = colorLists.get(colorListIndex.get());
+
+                        if (colorIndex.get() < currentColorList.size()) {
+                            Color currentColor = currentColorList.get(colorIndex.get());
+                            ItemStack coloredChestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
+                            LeatherArmorMeta meta = (LeatherArmorMeta) coloredChestplate.getItemMeta();
+                            meta.setColor(currentColor);
+                            coloredChestplate.setItemMeta(meta);
+                            player.getInventory().setChestplate(coloredChestplate);
+                            colorIndex.incrementAndGet();
+                            this.runTaskLater(TTTPlugin_1_16_2.this, 3); // 3 Ticks = 150ms
+                        } else {
+                            colorListIndex.incrementAndGet();
+                            colorIndex.set(0);
+
+                            if (colorListIndex.get() < colorLists.size()) {
+                                this.runTaskLater(TTTPlugin_1_16_2.this, 3); // 3 Ticks = 150ms
+                            } else {
+                                this.cancel();
+                            }
+                        }
+                    }
+                }.runTaskTimer(this, 0, 3); // Verzögerung: 0 Ticks, Periode: 3 Ticks (150ms)
+            } else {
+                sender.sendMessage(ChatColor.RED + "Dieser Befehl kann nur von Spielern ausgeführt werden.");
+            }
+            return true;
+        }
+
         if (command.getName().equalsIgnoreCase("colorsequencelimited")) {
             if (sender instanceof Player) {
                 final Player player = (Player) sender;
                 player.sendMessage(ChatColor.GREEN + "Die Farbe deiner Lederbrustplatte wird sich nun in einer Sequenz ändern.");
 
-                final List<List<Color>> colorLists = Arrays.asList(COLORS2, COLORS3, COLORS4, COLORS5);
+                final List<List<Color>> colorLists = Arrays.asList(COLORS6);
                 final AtomicInteger colorListIndex = new AtomicInteger(0);
                 final AtomicInteger colorIndex = new AtomicInteger(0);
 
